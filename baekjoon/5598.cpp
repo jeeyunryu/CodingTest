@@ -12,8 +12,9 @@ int main(){
 
     len = str.length();
 
+    //암호 해독
     for(int i = 0; i < len; i++){
-        if(str[i] < 68){
+        if(str[i] < 68){ // 알파벳 첫 3글자: A, B, C의 경우 예외 설정
             cout << (char)(str[i] + 23);
         }
         else{
