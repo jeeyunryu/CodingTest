@@ -12,9 +12,12 @@ vector<int> solution(vector<int> arr, int divisor) {
         }
         
     }
-    if(answer.size() == 0){
+    
+    if(answer.size() != 0){
+        sort(answer.begin(), answer.end());
+    } else {
         answer.push_back(-1);
     }
-    sort(answer.begin(), answer.end());
+   
     return answer;
 }
