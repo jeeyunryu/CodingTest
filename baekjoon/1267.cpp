@@ -4,20 +4,33 @@
 using namespace std;
 
 //청구 금액 계산
-int calc(vector<int> vec, int fee){
+int calc(vector<int> vec, string yokumje){
+    int fee = 0;
+    int total = 0;
+    int divisor = 0;
+
+    if(yokumje == "ysik"){
+        fee = 10;
+        divisor = 30;
+
+    } else {
+        fee = 15;
+        divisor = 60;
+    }
+
     for(int i = 0; i < vec.size(); i++){
         if(vec.at(i) != 0){
-            fee += (vec.at(i) / 30 + 1);
+            total += (vec.at(i) / divisor + 1) * fee;
         }
         
     }
-    return fee;
+    return total;
 }
 
 int main(){
     int numOfCalls;
     int tmp;
-    int ysik = 0, msik = 0;
+    int ysik = 0, msik = 0; //영식과 민식의 요금제를 적용했을 때 각각의 요금
     vector<int> vec;
 
     cin >> numOfCalls;
@@ -27,21 +40,9 @@ int main(){
         vec.push_back(tmp);
     }
 
-    //영식 요금제를 신청했을 경우 청구되는 금액
-    for(int i = 0; i < vec.size(); i++){
-        if(vec.at(i) != 0){
-            ysik += (vec.at(i) / 30 + 1) * 10;
-        }
-        
-    }
+    ysik = calc(vec, "ysik"); //영식 요금제를 신청했을 경우 청구되는 금액
 
-    //민식 요금제를 신청했을 경우 청구되는 금액
-    for(int i = 0; i < vec.size(); i++){
-        if(vec.at(i) != 0){
-            msik += (vec.at(i) / 60 + 1) * 15;
-        }
-        
-    }
+    msik = calc(vec, "msik"); //민식 요금제를 신청했을 경우 청구되는 금액
 
     if (ysik == msik){
         cout << "Y M " << ysik << endl;
