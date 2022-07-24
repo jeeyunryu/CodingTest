@@ -31,7 +31,7 @@ int main(){
     // vector<int> arr;
 
     int* arr;
-    arr = malloc(sizeof(int) * (n + 1));
+    arr = (int *)malloc(sizeof(int) * (n + 1));
 
     cin >> n;
     //n = 10;
