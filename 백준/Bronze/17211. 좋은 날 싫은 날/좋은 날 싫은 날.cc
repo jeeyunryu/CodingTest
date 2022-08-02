@@ -1,16 +1,10 @@
 //좋은 날 싫은 날
 #include <iostream>
 #include <cmath> //round 함수 이용하기 위함임
-#include <math.h> //pow 함수 사용하고자
+//#include <math.h> //pow 함수 사용하고자
 #include <vector>
 
 using namespace std;
-
-//전역 변수 선언 및 정의
-double good_good = 0, good_bad = 0, bad_good = 0, bad_bad = 0;
-int days = 0; // N일 뒤
-vector<double> good_vec; //N일 뒤 좋은 날일 확률의 집합
-vector<double> bad_vec; //N일 뒤 싫은 날일 확률의 집합
 
 
 // void my_func(bool isBad, double prev, int cnt){
@@ -45,22 +39,25 @@ vector<double> bad_vec; //N일 뒤 싫은 날일 확률의 집합
 
 int main(){
 
-    // 변수 정의
-    bool isBad = 0; //금일 재현의 기분
+    //int cnt = 0;
+    int days = 0; // N값 (사용자로부터 입력 받음)
     double per_good = 0, per_bad = 0; //N일 뒤 좋은/싫은 날일 확률
-    double prev = 1; //처음 
-    int cnt = 0;
-    double tmp = 0;
+    //double prev = 1; //처음 
+    double tmp = 0; //임시 변수
+    double good_good = 0, good_bad = 0, bad_good = 0, bad_bad = 0; //좋은 날/싫은 날 다음 날이 좋은 날/싫은 날일 확률 (사용자로부터 입력 받음)
+    vector<double> good_vec; //(인덱스값 + 1)일 뒤 좋은 날일 확률
+    vector<double> bad_vec; //(인덱스값 + 1)일 뒤 싫은 날일 확률
+    bool isBad = 0; //금일 재현의 기분
 
-    cin >> days >> isBad;
-    cin >> good_good >> good_bad >> bad_good >> bad_bad;
+    cin >> days >> isBad; //N값과 재현의 금일 기분을 입력 받음
+    cin >> good_good >> good_bad >> bad_good >> bad_bad; //확률을 입력 받음
 
-    if(isBad){ //첫째 날은 싫은 날
-        good_vec.push_back(bad_good);
-        bad_vec.push_back(bad_bad);
+    if(isBad){ //첫째 날: 싫은 날
+        good_vec.push_back(bad_good); //싫은 날 다음 좋은 날일 확률: 1일 뒤 좋은 날일 확률
+        bad_vec.push_back(bad_bad); //싫은 날 다음 싫은 날일 확률: 1일 뒤 싫은 날일 확률
     }
-    else{
-        good_vec.push_back(good_good);
+    else{ //첫째 날: 좋은 날
+        good_vec.push_back(good_good); 
         bad_vec.push_back(good_bad);
     }
 
